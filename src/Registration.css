@@ -1,0 +1,6 @@
+@import './Login.css';
+
+/* Registration specific additions or overrides if any */
+.auth-card.registration-card {
+    max-width: 450px;
+}
