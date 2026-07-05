@@ -4,7 +4,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Store";
-import { QRCode } from "qrcode.react";
+import { QRCodeSVG } from "qrcode.react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

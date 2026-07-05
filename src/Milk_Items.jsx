@@ -1,15 +1,13 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeItem } from "./CartSlice";
 
 function Milk() {
-  const [cart, setCart] = useState([]);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
-  const addToCart = (item) => {
-    setCart([...cart, item]);
-  };
-
-  const removeFromCart = (index) => {
-    const updatedCart = cart.filter((_, i) => i !== index);
-    setCart(updatedCart);
+  const handleAddToCart = (item) => {
+    dispatch(addToCart({ ...item, id: 300 + item.id }));
   };
 
   const milkItems = [
@@ -92,7 +90,7 @@ function Milk() {
             <p>{item.description}</p>
 
             <button
-              onClick={() => addToCart(item)}
+              onClick={() => handleAddToCart(item)}
               style={{
                 marginTop: "10px",
                 padding: "8px",
@@ -131,7 +129,7 @@ function Milk() {
             </span>
 
             <button
-              onClick={() => removeFromCart(index)}
+              onClick={() => dispatch(removeItem(item.id))}
               style={{
                 backgroundColor: "red",
                 color: "white",

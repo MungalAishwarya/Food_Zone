@@ -1,19 +1,16 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeItem } from "./CartSlice";
 
 function Non_Veg() {
-  const [cart, setCart] = useState([]);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   // Add to Cart
-  const addToCart = (item) => {
-   setCart([...cart, item]);
-};
-
-  // Remove from Cart
-  const removeFromCart = (index) => {
-  const updatedCart = cart.filter((_, i) => i !== index);
-  setCart(updatedCart);
-  };   
+  const handleAddToCart = (item) => {
+    dispatch(addToCart({ ...item, id: 200 + item.id }));
+  };
   
   const nonVegItems = [
     {
@@ -89,7 +86,7 @@ function Non_Veg() {
             <p>{item.description}</p>
 
             <button
-              onClick={() => addToCart(item)}
+              onClick={() => handleAddToCart(item)}
               style={{
                 marginTop: "10px",
                 padding: "8px",
@@ -129,7 +126,7 @@ function Non_Veg() {
             </span>
 
             <button
-              onClick={() => removeFromCart(index)}
+              onClick={() => dispatch(removeItem(item.id))}
               style={{
                 backgroundColor: "red",
                 color: "white",
